@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sevillana&display=swap');
+:root{
+  --gray : rgb(36, 33, 33); 
+}
+*{
+  font-family: "Poppins";
+  margin: 0px;
+  padding: 0px;
+  
+}
+
+nav {
+  display: flex;
+  max-width: 1528px;
+  margin: 0 auto;
+  gap: 20px;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  background: linear-gradient(to right, rgb(0, 0, 0) 10%, rgb(249, 251, 255) 85%);
+  background-color: rgb(2, 21, 38);
+  
+}
+.Head{
+  display: Flex;
+  text-align: left;  
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  
+}
+
+nav ul li {
+  transition-property: text-decoration;
+  transition-duration: 2s;
+  text-decoration: none;
+  background: linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 3px 
+    no-repeat;
+  color: white;
+  transition: 0.5s;
+}
+
+nav ul li:hover {
+  --d:100%
+}
+
+.btn{
+  padding: 6px 16px;
+  background: var(--gray);
+  height: 32px;
+  margin: 5px;
+  color: white;
+  font-weight: 500;
+  transition-property: color;
+  transition-duration: 1s;
+  color: white;
+  cursor: pointer;
+}
+.btn:hover, .btn:focus{
+  color: white;
+}
+
+h4{
+  color: white;
+  
+}
+a[href]{
+  text-decoration: none;
+  color: white;
+}

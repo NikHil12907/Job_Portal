@@ -1,0 +1,42 @@
+.Review {
+    position: relative;
+    padding: 4vw;
+    height: 200px;
+    background: linear-gradient(to right, rgb(0, 0, 0) 10%, rgb(249, 251, 255) 85%);
+    color: rgb(226, 226, 182);
+    
+}
+.Review h3{
+    color: rgb(226, 226, 182);
+}
+.Reviewcard h5{
+    color:  rgb(2, 21, 38);
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+.Reviewcard p{
+    position: relative;
+    margin-left: 20px;
+    bottom: 15px;
+    font-weight: 400;
+    left: 20px;
+    padding: 3px;
+    font-size: 1rem;
+
+    
+}
+.Reviewcard .bi{
+    font-size: 30px;
+    color:  rgb(2, 21, 38);
+    margin: 15px;
+}
+.Reviewcard{
+    color:  rgb(2, 21, 38);
+    margin-top: 50px;
+    margin-left: 20px;
+    background: linear-gradient(to top, rgb(69, 67, 67) 10%, rgb(249, 251, 255) 100%);
+    border: 2px solid white;
+    border-radius: 5px;
+}
