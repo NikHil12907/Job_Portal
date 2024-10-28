@@ -12,13 +12,11 @@ import {
   IconButton,
   
 } from "@mui/material";
-import CheckIcon from '@mui/icons-material/Check';
-import Alert from '@mui/material/Alert';
-
+import { useNavigate } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
 import Navbar from "./Header/Navbar";
-import Credentials from "./Footer/Credentials";
+
 const AdminRegister = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -47,7 +45,7 @@ const AdminRegister = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  const navigate = useNavigate("/")
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isRegister
@@ -56,14 +54,10 @@ const AdminRegister = () => {
     try {
       const response = await axios.post(url, formData);
       alert(response.data.message);
-      // <Alert icon={<CheckIcon fontSize="inherit"/>} severity="success">
-      //   {response.data.message}
-      // </Alert>
+      navigate("/admin")
+      
     } catch (error) {
-      alert(error.response?.data?.message);
-      // <Alert icon={<CheckIcon fontSize="inherit"/>} severity="success">
-      //   {error.response?.data?.message}
-      // </Alert>
+      alert(error);
     }
   };
 
@@ -78,7 +72,7 @@ const AdminRegister = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            height: "100vh", // Full viewport height
+            height: "100vh",
             background:"linear-gradient(135deg, black 50%, #c1616f 50%)",
             
             padding: 3,
@@ -98,7 +92,7 @@ const AdminRegister = () => {
               </Typography>
             )}
           </Typography>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} >
             <Grid container spacing={2}>
               <Grid item>
                 <IconButton edge="start" >
@@ -150,7 +144,7 @@ const AdminRegister = () => {
               }}
               fullWidth
             >
-              {isRegister ? "Register" : "Login"}
+              {isRegister ? "Register"  : "Login"}
             </Button>
 
             <Button

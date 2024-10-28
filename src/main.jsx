@@ -15,6 +15,7 @@ import Success from "./components/Success.jsx";
 import Testinomials from "./components/Testinomials.jsx";
 import Blog from "./components/Blog.jsx";
 import Pricing from "./components/Pricing.jsx";
+import Admin from "./components/Admin.jsx"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path:"/pricing",
     element: <Pricing />
+  },
+  {
+    path:"/admin",
+    element: <Admin />
   },
 ]);
 

@@ -37,30 +37,12 @@ function Navbar() {
   });
 
   const [anchorE1, setAnchorE1] = useState(null);
-  const [isprofileComplete, setIsProfileComplete] = useState(false);
+  const [anchorProfile, setAnchorProfile] = useState(null);
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
   const open = Boolean(anchorE1);
-  useEffect(() => {
-    // Fetch the user profile from your MongoDB API
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/getUserData/:pitrodanikhil139@gmail.com"
-        );
-        const profileData = response.data;
-
-        // Check if the necessary fields are filled
-        if (profileData.fname && profileData.email) {
-          setIsProfileComplete(true);
-        }
-      } catch (error) {
-        console.error("Error fetching profile data:", error);
-      }
-    };
-    fetchProfile();
-  }, []);
+  const isAdmin = user && user.isAdmin;
   const menu = [
     {
       id: 1,
@@ -88,30 +70,26 @@ function Navbar() {
       link: "/employer",
     },
   ];
-  isAuthenticated
-    ? menu.push(
-        {
-          id: 6,
-          name: "Update Profile",
-          link: "/update-profile",
-        },
-        {
-          id: 7,
-          name: "Delete profile",
-          link: "/Delete-user",
-        }
-      )
-    : menu.push({
-        id: 6,
-        name: "Complete Profile",
-        link: "/complete-profile",
-      });
+  if (isAuthenticated) {
+    menu.push({
+      id: 6,
+      name: "profile",
+      isDropdown: true,
+    });
+  }
   const handleMenu = (event) => {
     setAnchorE1(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorE1(null);
   };
+  const handleMenuClick = (event) => {
+    setAnchorProfile(event.currentTarget);
+  };
+  const handleCloseClick = () => {
+    setAnchorProfile(null);
+  };
+  const openProfile = Boolean(anchorProfile);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -134,16 +112,26 @@ function Navbar() {
                 gap: 2,
               }}
             >
-              {menu.map((item) => (
-                <Button
-                  key={item.id}
-                  component={Link}
-                  to={item.link}
-                  color="inherit"
-                >
-                  {item.name}
-                </Button>
-              ))}
+              {menu.map((item) =>
+                item.isDropdown ? (
+                  <Button
+                    key={item.id}
+                    onClick={handleMenuClick}
+                    color="inherit"
+                  >
+                    {item.name}
+                  </Button>
+                ) : (
+                  <Button
+                    key={item.id}
+                    component={Link}
+                    to={item.link}
+                    color="inherit"
+                  >
+                    {item.name}
+                  </Button>
+                )
+              )}
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -157,15 +145,15 @@ function Navbar() {
               </IconButton>
 
               <Menu
-                anchorE1={anchorE1}
+                anchorEl={anchorE1}
                 open={open}
                 onClose={handleClose}
                 anchorOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
                 transformOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
               >
@@ -174,7 +162,7 @@ function Navbar() {
                     key={items.id}
                     component={Link}
                     to={items.link}
-                    onClick={handleClose}
+                    onClick={handleCloseClick}
                   >
                     {items.name}
                   </MenuItem>
@@ -182,12 +170,64 @@ function Navbar() {
               </Menu>
             </Box>
             {isAuthenticated ? (
-              <Button
-                color="inherit"
-                onClick={() => logout({ returnTo: window.location.origin })}
-              >
-                Logout
-              </Button>
+              <>
+                <Button
+                  color="inherit"
+                  onClick={() => logout({ returnTo: window.location.origin })}
+                >
+                  Logout
+                </Button>
+                <Menu
+                  anchorEl={anchorProfile}
+                  open={openProfile}
+                  onClose={handleCloseClick}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                >
+                  {isAdmin ? (
+                    <>
+                      <MenuItem
+                        component={Link}
+                        to="/admin-dashboard"
+                        onClick={handleCloseClick}
+                      >
+                        Admin Dashboard
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/manage-users"
+                        onClick={handleCloseClick}
+                      >
+                        Manage Users
+                      </MenuItem>
+                    </>
+                  ) : (
+                    <>
+                      <MenuItem
+                        component={Link}
+                        to="/update-profile"
+                        onClick={handleCloseClick}
+                      >
+                        Update Profile
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/complete-profile"
+                        onClick={handleCloseClick}
+                      >
+                        Complete Profile
+                      </MenuItem>
+                      <MenuItem
+                        component={Link}
+                        to="/delete-user"
+                        onClick={handleCloseClick}
+                      >
+                        Delete Profile
+                      </MenuItem>
+                    </>
+                  )}
+                </Menu>
+              </>
             ) : (
               <Button color="inherit" onClick={loginWithRedirect}>
                 Login

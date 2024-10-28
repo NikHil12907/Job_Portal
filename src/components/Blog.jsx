@@ -69,10 +69,10 @@ const blogPosts = [
 ]
 
 const Blog = () =>{
-    return(
+    return(<>
+            <Navbar/>
         <ThemeProvider theme={darkTheme}>
             <CssBaseline/>
-            <Navbar/>
             <Container maxWidth="lg" sx={{paddingTop:"50px"}}>
                 <Typography variant="h4" color="secondary" textAlign="center" gutterBottom>
                     <b>Blogs</b>
@@ -103,6 +103,7 @@ const Blog = () =>{
             </Container>
             <Credentials/>
         </ThemeProvider>
+        </>
     )
 }
 
