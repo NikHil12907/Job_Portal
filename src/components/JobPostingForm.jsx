@@ -12,6 +12,7 @@ import {
   Divider
 } from "@mui/material";
 import axios from "axios";
+import API_CONFIG from "../config/api.js";
 import Navbar from "./Header/Navbar";
 import Credentials from "./Footer/Credentials";
 const JobPostingForm = () => {
@@ -49,7 +50,7 @@ const JobPostingForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:2000/api/job_Post",
+        `${API_CONFIG.JOB_POST_API_URL}/api/job_Post`,
         formData
       );
       alert(response.data.message);

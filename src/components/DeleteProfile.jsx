@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import API_CONFIG from "../config/api.js";
 import Credentials from "./Footer/Credentials";
 import Navbar from "./Header/Navbar";
 
@@ -39,7 +40,7 @@ const DeleteProfile = () => {
   const deleteUser = async () => {
     try {
       const { email, feedback, rating } = formData;
-      const response = await axios.post("http://localhost:3000/Delete-user", {
+      const response = await axios.post(`${API_CONFIG.USER_API_URL}/Delete-user`, {
         email,
         feedback,
         rating,

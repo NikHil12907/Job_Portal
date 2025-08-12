@@ -15,6 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
+import API_CONFIG from "../config/api.js";
 import Navbar from "./Header/Navbar";
 
 const AdminRegister = () => {
@@ -49,8 +50,8 @@ const AdminRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isRegister
-      ? "http://localhost:5000/admin/register"
-      : "http://localhost:5000/admin/login";
+      ? `${API_CONFIG.ADMIN_API_URL}/admin/register`
+      : `${API_CONFIG.ADMIN_API_URL}/admin/login`;
     try {
       const response = await axios.post(url, formData);
       alert(response.data.message);

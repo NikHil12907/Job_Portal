@@ -20,6 +20,7 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import API_CONFIG from "../config/api.js";
 import Navbar from "./Header/Navbar";
 
 
@@ -65,7 +66,7 @@ const JobListing = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/jobs?query=${searchTerm}`
+          `${API_CONFIG.JOB_API_URL}/api/jobs?query=${searchTerm}`
         );
         const filteredJobs = response.data.filter((job) =>{
           if (filter === "Recommended") {

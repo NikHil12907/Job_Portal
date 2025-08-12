@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import API_CONFIG from "../config/api.js";
 import Credentials from "./Footer/Credentials.jsx";
 const UpdateData = () => {
   const VisuallyHiddenInput = styled("input")({
@@ -79,7 +80,7 @@ const UpdateData = () => {
     if (isAuthenticated && user) {
       const email = user.email;
       axios
-        .get(`http://localhost:3000/getUserData/${email}`)
+        .get(`${API_CONFIG.USER_API_URL}/getUserData/${email}`)
         .then((response) => setFormData(response.data))
         .catch((err) => console.log(err));
     }
@@ -94,7 +95,7 @@ const UpdateData = () => {
     e.preventDefault();
     const email = user.email
     axios
-      .post("http://localhost:3000/UpdateUserData", { ...formData, email })
+      .post(`${API_CONFIG.USER_API_URL}/UpdateUserData`, { ...formData, email })
       .then((response) => {alert("Profile Updated")})
       .catch((err) => console.log("error in fetching data"));
   };

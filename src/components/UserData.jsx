@@ -16,6 +16,7 @@ import {
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth0 } from "@auth0/auth0-react";
+import API_CONFIG from "../config/api.js";
 import Credentials from "./Footer/Credentials"
 import Navbar from "./Header/Navbar";
 
@@ -117,7 +118,7 @@ const UserData = () => {
     };
     if (validate()) {
       axios
-        .post("http://localhost:3000/saveUserData", dataToSend)
+        .post(`${API_CONFIG.USER_API_URL}/saveUserData`, dataToSend)
         .then((response) => {
           alert(response.data);
         })

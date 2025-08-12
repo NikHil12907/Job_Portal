@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import API_CONFIG from "../config/api.js";
 import Navbar from "./Header/Navbar.jsx";
 import {
   Paper,
@@ -68,7 +69,7 @@ const Admin = () => {
     if (isAuthenticated && user) {
       const email = user.email;
       axios
-        .get(`http://localhost:3000/getUserData/${email}`)
+        .get(`${API_CONFIG.USER_API_URL}/getUserData/${email}`)
         .then((response) => setFormData(response.data))
         .catch((err) => console.log(err));
     }
